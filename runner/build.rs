@@ -49,6 +49,12 @@ fn main() {
         ensure_symlink(limine_dir.join(efi_file), efi_boot_dir.join(efi_file)).unwrap();
     }
 
+    // Cargo passes us the path the to kernel executable because it is an artifact dep
+    let kernel_executable_file = env::var("CARGO_BIN_FILE_KERNEL").unwrap();
+    // Symlink the kernel binary to `kernel`
+    let kernel_dest = iso_dir.join("kernel");
+    ensure_symlink(&kernel_executable_file, &kernel_dest).unwrap();
+
     // We'll call the output iso `tupiny-x86_64.iso`
     let output_iso = out_dir.join("tupiny-x86_64.iso");
     // This command creates an ISO file from our `disk_image` folder.
