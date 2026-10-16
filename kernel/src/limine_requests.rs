@@ -1,4 +1,8 @@
-use limine::{BaseRevision, RequestsEndMarker, RequestsStartMarker, request::FramebufferRequest};
+use limine::{
+    BaseRevision, RequestsEndMarker, RequestsStartMarker,
+    mp::MP_FLAG_X2APIC,
+    request::{FramebufferRequest, MpRequest},
+};
 
 /// Sets the base revision to the latest revision supported by the crate.
 /// See specification for further info.
@@ -12,6 +16,11 @@ pub static BASE_REVISION: BaseRevision = BaseRevision::new();
 #[used]
 #[unsafe(link_section = ".requests")]
 pub static FRAME_BUFFER_REQUEST: FramebufferRequest = FramebufferRequest::new();
+
+// Multiprocessing support
+#[used]
+#[unsafe(link_section = ".requests")]
+pub static MP_REQUEST: MpRequest = MpRequest::new(MP_FLAG_X2APIC);
 
 /// Define the stand and end markers for Limine requests.
 #[used]

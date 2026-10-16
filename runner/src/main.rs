@@ -19,6 +19,9 @@ fn main() {
     qemu.arg("-drive")
         .arg(format!("if=pflash,format=raw,readonly=on,file={}", ovmf));
 
+    // Add multiple CPU units
+    qemu.arg("--smp").arg("4");
+
     // Pass any args to qemu
     env::args().skip(1).for_each(|arg| {
         qemu.arg(arg);
