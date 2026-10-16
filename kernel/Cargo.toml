@@ -8,6 +8,7 @@ publish = false
 limine = "0.6.5"
 x86_64 = "0.15.5"
 uart_16550 = "0.9.0"
+embedded-graphics = "0.8.2"
 
 [[bin]]
 name = "kernel"
